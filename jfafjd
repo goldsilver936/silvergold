@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gold&Silver</title>
+    <!-- Fonturi de la Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Stiluri generale */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        header {
+            background-color: #222;
+            color: #fff;
+            padding: 40px 0;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+        }
+
+        header h1 {
+            font-family: 'Cinzel', serif;
+            font-size: 3.5em;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+        }
+
+        nav a {
+            color: white;
+            padding: 18px 30px;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background-color: #ff9900;
+        }
+
+        .content {
+            padding: 50px 10%;
+            text-align: center;
+        }
+
+        .product-card {
+            display: inline-block;
+            width: 30%;
+            margin: 20px 1%;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .product-card h3 {
+            color: #222;
+            font-size: 1.8em;
+            margin: 15px 0;
+            font-family: 'Cinzel', serif;
+        }
+
+        .product-card p {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .product-details {
+            display: none;
+            padding: 20px;
+            background-color: #fafafa;
+            text-align: left;
+            margin-top: 10px;
+            border-radius: 10px;
+        }
+
+        .product-card button {
+            padding: 10px 20px;
+            background-color: #ff9900;
+            border: none;
+            color: white;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .product-card button:hover {
+            background-color: #e68a00;
+        }
+
+        /* Carusel de imagini */
+        .carousel {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-images {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-images img {
+            width: 100%;
+            height: auto;
+        }
+
+        .carousel-button {
+            position: absolute;
+            top: 50%;
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            font-size: 2em;
+            cursor: pointer;
+            border: none;
+            transform: translateY(-50%);
+        }
+
+        .carousel-button.left {
+            left: 10px;
+        }
+
+        .carousel-button.right {
+            right: 10px;
+        }
+
+        /* Formular de contact */
+        .contact-form {
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            background-color: #ff9900;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .contact-form button:hover {
+            background-color: #e68a00;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #222;
+            color: white;
+        }
+
+        footer a {
+            color: #ff9900;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+<header style="position: relative;">
+    <!-- Emblema (Imagine) în colțul din stânga -->
+    <img src="titlu.png" alt="Emblema" style="position: absolute; top: 10px; left: 200px; height: 250px;">
+<header>
+    <h1><span style="color: #FFD700;">Gold</span>&<span style="color: #C0C0C0;">Silver</span></h1>
+    <p>Bijuterii unice pentru momente de neuitat</p>
+</header>
+
+<nav>
+    <a href="#">Acasă</a>
+    <a href="#despre">Despre noi</a>
+    <a href="#testimoniale">Testimoniale</a>
+    <a href="#contact">Contact</a>
+</nav>
+
+<div class="content">
+    <section id="galerie">
+     
+
+        <!-- Carusel de imagini -->
+        <div class="carousel">
+            <div class="carousel-images">
+                <img src="magazin.png" alt="Bijuterii Elegant">
+                  <button class="carousel-button left" onclick="moveCarousel(-1)">&#10094;</button>
+            <button class="carousel-button right" onclick="moveCarousel(1)">&#10095;</button>
+        </div>
+<div class="content">
+    <section id="galerie">
+       
+
+        <!-- Produse din Aur de 24k -->
+        <div class="product-card">
+            <img src="brataraaur.png" alt="Lănțișor Aur 24k">
+            <h3>Lănțișor din Aur 24k</h3>
+            <p>De la 490 Lei</p>
+            <button onclick="toggleDetails('details1')">Vezi Detalii</button>
+            <div id="details1" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Lănțișor din aur de 24k, design elegant și sofisticat.</p>
+                <h4>Material:</h4>
+                <p>Aur 24k</p>
+                <h4>Preț:</h4>
+                <p>De la 490 Lei</p>
+            </div>
+        </div>
+
+                <!-- Produse din Argint -->
+        <div class="product-card">
+            <img src="lantargint.png" alt="Lănțișor Argint">
+            <h3>Lănțișor din Argint</h3>
+            <p>De la 150 Lei</p>
+            <button onclick="toggleDetails('details3')">Vezi Detalii</button>
+            <div id="details3" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Lănțișor din argint, simplu și elegant, perfect pentru orice ținută.</p>
+                <h4>Material:</h4>
+                <p>Argint</p>
+                <h4>Preț:</h4>
+                <p>De la 150 Lei</p>
+            </div>
+        </div>
+
+        <!-- Produse din Aur Roz -->
+        <div class="product-card">
+            <img src="lantroz.png" alt="Lănțișor Aur Roz">
+            <h3>Lănțișor din Aur Roz</h3>
+            <p>De la 400 Lei</p>
+            <button onclick="toggleDetails('details4')">Vezi Detalii</button>
+            <div id="details4" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Lănțișor elegant din aur roz, perfect pentru un look sofisticat.</p>
+                <h4>Material:</h4>
+                <p>Aur Roz</p>
+                <h4>Preț:</h4>
+                <p>De la 400 Lei</p>
+            </div>
+        </div>
+<!-- Produse din Aur de 18k -->
+        <div class="product-card">
+            <img src="bratara.png" alt="Brățară Aur 18k">
+            <h3>Brățară din Aur 18k</h3>
+            <p>De la 550 Lei</p>
+            <button onclick="toggleDetails('details2')">Vezi Detalii</button>
+            <div id="details2" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Brățară simplă din aur de 18k, potrivită pentru orice ocazie.</p>
+                <h4>Material:</h4>
+                <p>Aur 18k</p>
+                <h4>Preț:</h4>
+                <p>De la 550 Lei</p>
+            </div>
+        </div>
+
+ <!-- Brățări din Aur Roz -->
+        <div class="product-card">
+            <img src="bratararoz.png" alt="Brățară din Aur Roz">
+            <h3>Brățară din Aur Roz</h3>
+            <p>De la 600 Lei</p>
+            <button onclick="toggleDetails('details2')">Vezi Detalii</button>
+            <div id="details2" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Brățară elegantă din aur roz, ideală pentru un look sofisticat.</p>
+                <h4>Material:</h4>
+                <p>Aur Roz</p>
+                <h4>Preț:</h4>
+                <p>De la 600 Lei</p>
+            </div>
+        </div>
+ <!-- Brățări de Picior -->
+        <div class="product-card">
+            <img src="bratarapicior.png" alt="Brățară de Picior">
+            <h3>Brățară de Picior</h3>
+            <p>De la 150 Lei</p>
+            <button onclick="toggleDetails('details3')">Vezi Detalii</button>
+            <div id="details3" class="product-details">
+                <h4>Descriere:</h4>
+                <p>Brățară delicată pentru picior, perfectă pentru sezonul estival.</p>
+                <h4>Material:</h4>
+                <p>Argint sau Aur Roz</p>
+                <h4>Preț:</h4>
+                <p>De la 150 Lei</p>
+            </div>
+        </div>
+    </section>
+</div>
+ <h2>Ceasuri de Lux</h2>
+
+    <!-- Ceasuri din Aur -->
+    <div class="product-card">
+        <img src="ceasaur.png" alt="Ceas Aur 24k">
+        <h3>Ceas Aur 24k - Bărbați</h3>
+        <p>De la 2200 Lei</p>
+        <button onclick="toggleDetails('details1')">Vezi Detalii</button>
+        <div id="details1" class="product-details">
+            <h4>Descriere:</h4>
+            <p>Ceas din aur 24k, design clasic pentru bărbați eleganți.</p>
+            <h4>Preț:</h4>
+            <p>De la 2200 Lei</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="ceasroz.png" alt="Ceas Aur Roz">
+        <h3>Ceas Aur Roz - Femei</h3>
+        <p>De la 1500 Lei</p>
+        <button onclick="toggleDetails('details2')">Vezi Detalii</button>
+        <div id="details2" class="product-details">
+            <h4>Descriere:</h4>
+            <p>Ceas elegant din aur roz, ideal pentru femeile cu gust rafinat.</p>
+            <h4>Preț:</h4>
+            <p>De la 1500 Lei</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="ceasargint.png" alt="Ceas Argint">
+        <h3>Ceas Argint - Unisex</h3>
+        <p>De la 500 Lei</p>
+        <button onclick="toggleDetails('details3')">Vezi Detalii</button>
+        <div id="details3" class="product-details">
+            <h4>Descriere:</h4>
+            <p>Ceas din argint, simplu și elegant, potrivit oricărei ținute.</p>
+            <h4>Preț:</h4>
+            <p>De la 500 Lei</p>
+        </div>
+    </div>
+</section>
+<section>
+    <h2>Cercei Premium</h2>
+
+    <!-- Cercei Aur 24k -->
+    <div class="product-card">
+        <img src="cerceimici.png" alt="Cercei Aur 24k">
+        <h3>Cercei Aur 24k - Mici</h3>
+        <p>De la 400 Lei</p>
+        <button onclick="toggleDetails('details4')">Vezi Detalii</button>
+        <div id="details4" class="product-details">
+            <h4>Descriere:</h4>
+            <p>Cercei mici din aur 24k, perfecti pentru un look elegant.</p>
+            <h4>Preț:</h4>
+            <p>De la 400 Lei</p>
+        </div>
+    </div>
+
+    <div class="product-card">
+        <img src="cerceiroz.png" alt="Cercei Aur Roz">
+        <h3>Cercei Aur Roz - Cu Pietre</h3>
+        <p>De la 650 Lei</p>
+        <button onclick="toggleDetails('details5')">Vezi Detalii</button>
+        <div id="details5" class="product-details">
+            <h4>Descriere:</h4>
+            <p>Cercei din aur roz cu pietre prețioase, pentru un look deosebit.</p>
+            <h4>Preț:</h4>
+            <p>De la 650 Lei</p>
+        </div>
+    </div>
+</section>
+<!-- Inel din Aur 24k -->
+<div class="product-card">
+    <img src="inelaur.png" alt="Inel Aur 24k">
+    <h3>Inel din Aur 24k</h3>
+    <p>De la 850 Lei</p>
+    <button onclick="toggleDetails('details6')">Vezi Detalii</button>
+    <div id="details6" class="product-details">
+        <h4>Descriere:</h4>
+        <p>Inel elegant din aur 24k, ideal pentru momente speciale sau cadouri de neuitat.</p>
+        <h4>Material:</h4>
+        <p>Aur 24k</p>
+        <h4>Preț:</h4>
+        <p>De la 850 Lei</p>
+    </div>
+</div>
+
+
+
+
+    </section>
+
+    <!-- Formular de contact -->
+    <section id="contact">
+        <h2>Contactează-ne</h2>
+        <div class="contact-form">
+            <form action="#">
+                <input type="text" name="nume" placeholder="Nume complet" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <textarea name="mesaj" rows="4" placeholder="Mesaj" required></textarea>
+                <button type="submit">Trimite mesajul</button>
+            </form>
+        </div>
+    </section>
+</div>
+
+
+<footer>
+    <p>© 2024 Gold&Silver | <a href="#">Termeni și condiții</a> | <a href="#">Politica de confidențialitate</a></p>
+</footer>
+
+<script>
+    // Funcționalitate detalii produs
+    function toggleDetails(id) {
+        var details = document.getElementById(id);
+        details.style.display = (details.style.display === 'block') ? 'none' : 'block';
+    }
+</script>
+
+</body>
+</html>
